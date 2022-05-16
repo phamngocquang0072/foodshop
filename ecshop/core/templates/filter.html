@@ -1,0 +1,79 @@
+{% block filter %}
+{% load static%}
+
+<script type="text/javascript" src="{% static 'js/pro-filter.js' %}"></script>
+<div class="col-lg-3 col-md-5">
+    <div class="sidebar">
+        
+        <div class="sidebar__item">
+            <h4>Department</h4>
+            <ul>
+                {% if cat %}
+                    {% for category in cat %}
+                        <li><a href="{% url 'shop-cat' category.id %}">{{ category.title }}</a></li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+        <div class="sidebar__item">
+            <h4>Price</h4>
+            <div class="price-range-wrap">
+                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                    data-min="0" data-max="999" >
+                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default " id="price-range1"></span>
+                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" id="price-range2" ></span>
+                </div>
+                <div class="range-slider">
+                    <div class="price-input">
+                        <input class="filter-inp"  type="text" id="minamount">
+                        <input class="filter-inp"  type="text" id="maxamount">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% comment %} <div class="sidebar__item">
+            <h4>Rate</h4>
+            <div class="rate-range-wrap">
+                <div class="rate-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                    data-min="0" data-max="5">
+                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                    <span tabindex="1" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                    <span tabindex="1" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                </div>
+                <div class="range-slider">
+                    <div class="rate-input">
+                        <input class="filter-inp" onchange="alert(this.value)" type="text" id="minrate">
+                        <input class="filter-inp" onchange="alert(this.value)" type="text" id="maxrate">
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        
+       
+        <div class="sidebar__item">
+            <div class="latest-product__text">
+                <h4>Latest Products</h4>
+                <div class="latest-product__slider owl-carousel">
+                    <div class="latest-prdouct__slider__item">
+                        {% if ltpro %}
+                            {% for product in ltpro %}
+                                <a href="{% url 'shop-detail' product.id %}" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="/media/{{product.productimage_set.first.image}}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>{{product.title}}</h6>
+                                        <span>${{product.price}}</span>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        {% endif %} 
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,480 @@
+{% extends 'base.html' %}
+{% block index %}
+{% load static %}
+{% include 'header.html' %}
+ <!-- Hero Section -->
+ <section class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>All Departments</span>
+                    </div>
+                    
+                    <ul>
+                    {% if cat %}
+                        {% for category in cat %}
+                            <li><a href="{% url 'shop-cat' category.id %}">{{ category.title }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+                        {% comment %} <li><a href="#">Vegetables</a></li>
+                        <li><a href="#">Fruit & Nut Gifts</a></li>
+                        <li><a href="#">Fresh Berries</a></li>
+                        <li><a href="#">Ocean Foods</a></li>
+                        <li><a href="#">Butter & Eggs</a></li>
+                        <li><a href="#">Fastfood</a></li>
+                        <li><a href="#">Fresh Onion</a></li>
+                        <li><a href="#">Papayaya & Crisps</a></li>
+                        <li><a href="#">Oatmeal</a></li>
+                        <li><a href="#">Fresh Bananas</a></li> {% endcomment %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="/search">
+                            
+                                   
+                            <input name ='q' type="text" placeholder="What are you looking for?">
+                            <button type="submit" class="site-btn">SEARCH</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>704-768-7449</h5>
+                            <span>24/7 Support</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero__item set-bg" data-setbg="{% static 'img/hero/banner.jpg'%}">
+                    <div class="hero__text">
+                        <span>FRESH FRUIT</span>
+                        <h2>Vegetable <br/>100% Organic</h2>
+                        <p>Free Pickup and Delivery Available</p>
+                        <a href="{% url 'shop' %}" class="primary-btn">SHOP NOW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section END -->
+
+<!-- Categories Section -->
+<section class="categories">
+    <div class="container">
+        <div class="row">
+            <div class="categories__slider owl-carousel">
+                <!-- 4x3 qq--> 
+                {% if cat %}
+                    {% for category in cat %}
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="/media/{{category.image}}">
+                            <h5><a href="{% url 'shop-cat' category.id %}">{{ category.title }}</a></h5>
+                        </div>
+                    </div>
+                    {% endfor%}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Categories Section END -->
+
+<!-- Featured Section -->
+<section class="featured spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Featured Products</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row featured__filter">
+            <div class="categories__slider owl-carousel">
+                <!-- 8 items/products -->
+                {% if fpro %}
+                    {% for product in fpro %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix {{product.category}}">
+                            <div class="featured__item">
+                                <div class="featured__item__pic set-bg" data-setbg="/media/{{product.productimage_set.first.image}}">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="{% url 'shop-detail' product.id %}">{{product.title}}</a></h6>
+                                    <h5>${{product.price}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% comment %} <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-2.jpg'%}">
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="featured__item__text">
+                        <h6><a href="#">2</a></h6>
+                        <h5>$30.00</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-3.jpg'%}">
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="featured__item__text">
+                        <h6><a href="#">3</a></h6>
+                        <h5>$30.00</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-4.jpg'%}">
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="featured__item__text">
+                        <h6><a href="#">4</a></h6>
+                        <h5>$30.00</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-5.jpg'%}">
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="featured__item__text">
+                        <h6><a href="#">5</a></h6>
+                        <h5>$30.00</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-6.jpg'%}">
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="featured__item__text">
+                        <h6><a href="#">6</a></h6>
+                        <h5>$30.00</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-7.jpg'%}">
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="featured__item__text">
+                        <h6><a href="#">7</a></h6>
+                        <h5>$30.00</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
+                <div class="featured__item">
+                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-8.jpg'%}">
+                        <ul class="featured__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="featured__item__text">
+                        <h6><a href="#">8</a></h6>
+                        <h5>$30.00</h5>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+        </div>
+    </div>
+</section>
+<!-- Featured Section END -->
+
+<!-- Banner -->
+<div class="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="banner__pic">
+                    <img src="{% static 'img/banner/banner-1.jpg'%}" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="banner__pic">
+                    <img src="{% static 'img/banner/banner-2.jpg'%}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner END -->
+
+<!-- Latest/Top Rated/Review Products Section -->
+<section class="latest-product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="latest-product__text">
+                    <!-- Latest Products -->
+                    <h4>Latest Products</h4>
+                    {% if ltpro %}
+                                {% for product in ltpro %}
+                    <div class="latest-product__slider owl-carousel">
+                        
+                        <div class="latest-product__slider__item ">
+                            
+                                    <a href="{% url 'shop-detail' product.id %}" class="latest-product__item">
+                                        <div class="latest-product__item__pic">
+                                            <img src="/media/{{product.productimage_set.first.image}}" alt="">
+                                        </div>
+                                        <div class="latest-product__item__text">
+                                            <h6>{{product.title}}</h6>
+                                            <span>${{product.price}}</span>
+                                        </div>
+                                    </a>
+                               
+                    
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %} 
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="latest-product__text">
+                    <!-- Top Rated Products -->
+                    <h4>Top Rated Products</h4>
+                    <div class="latest-product__slider owl-carousel">
+                        <div class="latest-product__slider__item">
+                            {% comment %} <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-1.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>1</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-2.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>2</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>{% endcomment %}
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-3.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>3</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="latest-prdouct__slider__item">
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-1.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>4</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-2.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>5</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-3.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>6</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="latest-product__text">
+                    <!-- Review Products -->
+                    <h4>Review Products</h4>
+                    <div class="latest-product__slider owl-carousel">
+                        <div class="latest-product__slider__item">
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-1.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>1</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-2.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>2</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-3.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>3</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="latest-prdouct__slider__item">
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-1.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>4</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-2.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>5</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{% static 'img/latest-product/lp-3.jpg'%}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>6</h6>
+                                    <span>$30.00</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Latest/Top Rated/Review Products Section END -->
+
+<!-- Blog Section -->
+<section class="from-blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title from-blog__title">
+                    <h2>From The Blog</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="blog__item">
+                    <div class="blog__item__pic">
+                        <img src="{% static 'img/blog/blog-1.jpg'%}" alt="">
+                    </div>
+                    <div class="blog__item__text">
+                        <ul>
+                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                            <li><i class="fa fa-comment-o"></i> 5</li>
+                        </ul>
+                        <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="blog__item">
+                    <div class="blog__item__pic">
+                        <img src="{% static 'img/blog/blog-2.jpg'%}" alt="">
+                    </div>
+                    <div class="blog__item__text">
+                        <ul>
+                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                            <li><i class="fa fa-comment-o"></i> 5</li>
+                        </ul>
+                        <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
+                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="blog__item">
+                    <div class="blog__item__pic">
+                        <img src="{% static 'img/blog/blog-3.jpg'%}" alt="">
+                    </div>
+                    <div class="blog__item__text">
+                        <ul>
+                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                            <li><i class="fa fa-comment-o"></i> 5</li>
+                        </ul>
+                        <h5><a href="#">Visit the clean farm in the US</a></h5>
+                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Section END -->
+{% endblock %}
