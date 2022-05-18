@@ -9,9 +9,10 @@ urlpatterns = [
     path('shop/', shop, name='shop'),
     path('pro-detail/<int:id>/', productdetail, name='shop-detail'),
     path('shop-cat/<int:cat_id>/', shop_cat, name='shop-cat'),
-    path('shop-cart/',cart, name='shop-cart'),
     path('checkout/',checkout, name='checkout'),
-    path('search',search, name='search')
+    path('search',search, name='search'),
+    path('add-to-cart',add_to_cart, name='add_to_cart'),
+    path('shop-cart/',cart, name='shop-cart'),
 ]
 
 if settings.DEBUG:

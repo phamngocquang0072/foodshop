@@ -7,20 +7,7 @@
 
 <!-- Hero Section END -->
     <script>
-        $(document).ready(function(){
-             //add to cart
-
-            $('#addToCart').on('click', function (){
-                var _qty=$("#qty").val();
-                var _proId=$(".product-id").val();
-                var _proTitle=$(".product-title").val();
-                var _proPrice=$(".product-price").val();
-                var _proImage=$(".product-image").val();
-                console.log(_qty, _proId, _proTitle);
-
-            });
-            //end add to cart
-        });
+      
     </script>
 
 
@@ -80,7 +67,7 @@
                                 <i class="fa fa-star-half-o"></i>
                                 <span>(18 reviews)</span>
                             </div>
-                            <div class="product__details__price">${{pro.price}}</div>
+                            <div class="product__details__price" value="{{pro.price}}">${{pro.price}}</div>
                             <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
                                 vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
                                 quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
