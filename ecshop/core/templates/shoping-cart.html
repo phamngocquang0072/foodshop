@@ -22,8 +22,9 @@
     <!-- Breadcrumb Section END -->
 
     <!-- Shoping Cart Section -->
+    <div id="cartList">
     <section class="shoping-cart spad">
-        <div class="container">
+        <div class="container" >
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
@@ -52,15 +53,17 @@
                                         <td class="shoping__cart__quantity">
                                             <div class="quantity">
                                                 <div class="pro-qty">
-                                                    <input type="text" value="{{item.qty}}">
+                                                    <span class="dec qtybtn" id="quantitysub" data-item="{{product_id}}">-</span>
+                                                    <input id='cart_item_qty' class="product-qty-{{product_id}}" type="text" value="{{item.qty}}">
+                                                    <span class="inc qtybtn" id="quantityadd" data-item="{{product_id}}">+</span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="shoping__cart__total">
                                             ${% widthratio item.qty 1 item.price %}
                                         </td>
-                                        <td class="shoping__cart__item__close">
-                                            <span class="icon_close"></span>
+                                        <td class="delete-item-element">
+                                            <button class="btn btn-sm btn-danger delete-item" id="delete-item" data-item="{{product_id}}"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 {% endfor%}
@@ -130,7 +133,6 @@
                             <h5>Discount Codes</h5>
                             <form action="#">
                                 <input type="text" placeholder="Enter your coupon code">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
                             </form>
                         </div>
                     </div>
@@ -139,8 +141,8 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>${{ total1 }}</span></li>
-                            <li>Total <span>$0</span></li>
+                            
+                            <li>Total <span>${{ total1 }}</span></li>
                         </ul>
                         <a href="{% url 'checkout' %}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
@@ -149,5 +151,5 @@
         </div>
     </section>
     <!-- Shoping Cart Section End -->
-
+</div>
 {% endblock %}

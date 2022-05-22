@@ -25,7 +25,15 @@
                         </div>
                         
                         <div class="header__top__right__auth">
-                            <a href="#"><i class="fa fa-user"></i> Login</a>
+                            {% if user.is_authenticated %}
+                            <div class="row">
+                                        <a class="mr-3" href="#"><i class="fa fa-user"></i>{{ user.first_name }}</a>
+                                        <a class="" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </div>
+                                
+                            {% else %}
+                                <a href="{% url 'login' %}"><i class="fa fa-user"></i> Login</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -62,7 +70,7 @@
                         <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                         <li><a href="{% url 'shop-cart'%}"><i class="fa fa-shopping-bag"></i> <span class='cart-list-total'>{{request.session.cartdata|length}}</span></a></li>
                     </ul>
-                    <div class="header__cart__price"><span>$10.00</span></div>
+                    <div class="header__cart__price"><span></span></div>
                 </div>
             </div>
         </div>

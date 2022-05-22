@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+{% load static%}
+{% block login %}
+{% include 'header.html'%}
+
+<div class="container mt-5 mb-5 my-4">
+    <h3 class="my-4 border-bottom pb-1"> Sign In</h3>
+    <table class="table table-bordered">  
+            <form method="post">
+                {% csrf_token %}  
+                {{ form.as_table}}                              
+                <td class="form-group">
+                    <button type="submit" value="Login" class="btn btn-primary btn-block"> Sign In  </button>
+                </td>                                                                
+                <td>      
+                    <p class="text-center">Don't have an account? <a href="{% url 'register' %}">Sign Up</a> </p>                                                                 
+                </td>
+            </form>
+    </table>    
+</div>
+{% endblock %}
